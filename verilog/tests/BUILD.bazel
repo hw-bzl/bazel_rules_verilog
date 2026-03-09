@@ -1,0 +1,36 @@
+load("//verilog:defs.bzl", "verilog_library")
+load(":verilog_library_analysis_test.bzl", "verilog_library_test_suite")
+
+package(default_visibility = ["//visibility:private"])
+
+verilog_library(
+    name = "leaf",
+    srcs = ["leaf.sv"],
+    hdrs = ["leaf.svh"],
+    data = ["leaf.dat"],
+)
+
+verilog_library(
+    name = "dep_a",
+    srcs = ["dep_a.sv"],
+)
+
+verilog_library(
+    name = "dep_b",
+    srcs = ["dep_b.sv"],
+    deps = [":dep_a"],
+)
+
+verilog_library(
+    name = "top",
+    srcs = ["top.sv"],
+    deps = [":dep_b"],
+)
+
+verilog_library(
+    name = "bad_src",
+    srcs = ["invalid.txt"],
+    tags = ["manual"],
+)
+
+verilog_library_test_suite(name = "verilog_library_tests")
