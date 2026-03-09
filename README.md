@@ -1,5 +1,7 @@
 # rules_verilog
 
+[![CI](https://github.com/MrAMS/bazel_rules_verilog/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/MrAMS/bazel_rules_verilog/actions/workflows/ci.yml)
+
 A small Bazel module that provides reusable SystemVerilog/Verilog dependency graph metadata via `verilog_library`.
 
 ## What This Module Does
