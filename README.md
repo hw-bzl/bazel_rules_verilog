@@ -14,7 +14,7 @@ A small Bazel module that provides reusable SystemVerilog/Verilog dependency gra
 - `data` (runtime/compile-side data files)
 - `deps` (other `verilog_library` targets)
 
-and propagates a transitive `VerilogInfo` provider that downstream rules can consume, like [rules_verilator](https://github.com/MrAMS/bazel_rules_verilator).
+and propagates a transitive `VerilogInfo` provider that downstream rules can consume, like [rules_verilator](https://github.com/MrAMS/bazel_rules_verilator) and [rules_vivado](https://github.com/CruxML/bazel_rules_vivado).
 
 ## Installation (Bzlmod)
 
