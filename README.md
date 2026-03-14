@@ -3,7 +3,7 @@
 [![BCR](https://img.shields.io/badge/BCR-rules_verilog-green?logo=bazel)](https://registry.bazel.build/modules/rules_verilog)
 [![CI](https://github.com/MrAMS/bazel_rules_verilog/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/MrAMS/bazel_rules_verilog/actions/workflows/ci.yml)
 
-A small Bazel module that provides reusable SystemVerilog/Verilog dependency graph metadata via `verilog_library`.
+The primary goal of `rules_verilog` is to provide only the most **foundational** verilog/systemverilog interfaces (e.g., `verilog_library`).
 
 > [!TIP]
 > 
