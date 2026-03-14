@@ -7,7 +7,9 @@ A small Bazel module that provides reusable SystemVerilog/Verilog dependency gra
 
 > [!TIP]
 > 
-> How this is different from https://github.com/hdl/bazel_rules_hdl? Please check https://github.com/bazelbuild/bazel-central-registry/pull/7852 and https://github.com/MrAMS/bazel_rules_verilog/issues/1 for more details
+> How this is different from https://github.com/hdl/bazel_rules_hdl? Why your repository basically only has one rule and a couple of providers?
+>
+> Please check https://github.com/bazelbuild/bazel-central-registry/pull/7852 and https://github.com/MrAMS/bazel_rules_verilog/issues/1 for more details
 
 ## What This Module Does
 
