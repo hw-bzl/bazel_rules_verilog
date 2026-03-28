@@ -5,6 +5,7 @@ py_test(
     srcs = ["version_test.py"],
     data = [
         "//:MODULE.bazel",
+        "//:README.md",
         "//:version.bzl",
     ],
     deps = [

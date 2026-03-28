@@ -7,6 +7,8 @@ from pathlib import Path
 
 from python.runfiles import Runfiles
 
+PKG_NAME = "rules_verilog"
+
 
 def rlocation(runfiles: Runfiles, rlocationpath: str) -> Path:
     """Look up a runfile and ensure the file exists
@@ -32,7 +34,7 @@ def rlocation(runfiles: Runfiles, rlocationpath: str) -> Path:
 
 
 class RepoVersionTests(unittest.TestCase):
-    """Test that the `rules_verilog` versions match for WORKSPACE and bzlmod."""
+    """Test that the `{PKG_NAME}` versions match for WORKSPACE and bzlmod."""
 
     def test_versions(self) -> None:
         """Test that the version.bzl and MOUDLE.bazel versions are synced."""
@@ -40,25 +42,42 @@ class RepoVersionTests(unittest.TestCase):
         if not runfiles:
             raise EnvironmentError("Failed to locate runfiles.")
 
-        version_bzl = rlocation(runfiles, "rules_verilog/version.bzl")
+        version_bzl = rlocation(runfiles, f"{PKG_NAME}/version.bzl")
         bzl_version = re.findall(
             r'VERSION = "([\w\d\.]+)"',
             version_bzl.read_text(encoding="utf-8"),
             re.MULTILINE,
         )
         assert bzl_version, f"Failed to parse version from {version_bzl}"
+        assert len(bzl_version) == 1, (
+            f"Expect len(bzl_version)=1, but got {len(bzl_version)}"
+        )
 
-        module_bazel = rlocation(runfiles, "rules_verilog/MODULE.bazel")
-        module_version = re.findall(
-            r'module\(\n\s+name = "rules_verilog",\n\s+version = "([\d\w\.]+)",\n',
+        bzl_version = bzl_version[0]
+
+        module_bazel = rlocation(runfiles, f"{PKG_NAME}/MODULE.bazel")
+        module_versions = re.findall(
+            rf'module\(\n\s+name = "{re.escape(PKG_NAME)}",\n\s+version = "([\d\w\.]+)",\n',
             module_bazel.read_text(encoding="utf-8"),
             re.MULTILINE,
         )
-        assert module_version, f"Failed to parse version from {module_bazel}"
+        assert module_versions, f"Failed to parse version from {module_bazel}"
 
-        assert (
-            bzl_version[0] == module_version[0]
-        ), f"{bzl_version[0]} == {module_version[0]}"
+        readme_bazel = rlocation(runfiles, f"{PKG_NAME}/README.md")
+        readme_versions = re.findall(
+            rf'bazel_dep\(\s*name\s*=\s*"{re.escape(PKG_NAME)}",\s*version\s*=\s*"([\d\w\.]+)"\s*\)',
+            readme_bazel.read_text(encoding="utf-8"),
+            re.MULTILINE,
+        )
+        # allow readme_versions is empty
+
+        assert all(e == bzl_version for e in module_versions), (
+            "Version in MODULE.bazel do not match"
+        )
+
+        assert all(e == bzl_version for e in readme_versions), (
+            "Version in README.md do not match"
+        )
 
 
 if __name__ == "__main__":
