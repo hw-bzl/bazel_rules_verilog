@@ -1,3 +1,8 @@
 licenses(["notice"])
 
-exports_files(["LICENSE"])
+exports_files([
+    "LICENSE",
+    "MODULE.bazel",
+    "version.bzl",
+    "README.md",
+])
