@@ -15,6 +15,7 @@
     }
   ],
   "repository": [
+    "github:hw-bzl/bazel_rules_verilog",
     "github:hw-bzl/rules_verilog"
   ],
   "versions": [],

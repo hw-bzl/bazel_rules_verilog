@@ -6,7 +6,7 @@
 The primary goal of `rules_verilog` is to provide only the most **foundational** verilog/systemverilog interfaces (e.g., `verilog_library`).
 
 > [!TIP]
-> 
+>
 > How this is different from https://github.com/hdl/bazel_rules_hdl? Why your repository basically only has one rule and a couple of providers?
 >
 > Please check https://github.com/bazelbuild/bazel-central-registry/pull/7852 and https://github.com/MrAMS/bazel_rules_verilog/issues/1 for more details
@@ -30,7 +30,7 @@ and propagates a transitive `VerilogInfo` provider that downstream rules can con
 Add to `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "rules_verilog", version = "1.1.0")
+bazel_dep(name = "rules_verilog", version = "1.1.1")
 ```
 
 ## Usage
